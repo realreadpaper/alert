@@ -7,40 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A00000000000000000000001 /* GuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000101 /* GuardApp.swift */; };
-		A00000000000000000000002 /* AlarmEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000102 /* AlarmEngine.swift */; };
-		A00000000000000000000003 /* BlePrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000103 /* BlePrototype.swift */; };
-		A00000000000000000000004 /* RollingIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000104 /* RollingIdentifier.swift */; };
-		A00000000000000000000005 /* GuardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000105 /* GuardEngine.swift */; };
-		A00000000000000000000006 /* LocalIdentityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000106 /* LocalIdentityStore.swift */; };
-		A00000000000000000000007 /* LanHeartbeatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000107 /* LanHeartbeatMessage.swift */; };
-		A00000000000000000000008 /* PermissionGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000108 /* PermissionGuide.swift */; };
-		A00000000000000000000009 /* GuardDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000109 /* GuardDesignSystem.swift */; };
-		A0000000000000000000000A /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010A /* AlarmView.swift */; };
-		A0000000000000000000000B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010B /* HomeView.swift */; };
-		A0000000000000000000000C /* AddDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010C /* AddDeviceView.swift */; };
-		A0000000000000000000000D /* GuardPairingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010D /* GuardPairingModels.swift */; };
-		A0000000000000000000000E /* GuardPairingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010E /* GuardPairingService.swift */; };
-		A0000000000000000000000F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010F /* SettingsView.swift */; };
+		A00000000000000000000001 /* GuardApp/GuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000101 /* GuardApp/GuardApp.swift */; };
+		A00000000000000000000002 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000102 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift */; };
+		A00000000000000000000003 /* GuardApp/Core/Bluetooth/BlePrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000103 /* GuardApp/Core/Bluetooth/BlePrototype.swift */; };
+		A00000000000000000000004 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000104 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift */; };
+		A00000000000000000000005 /* GuardApp/Core/GuardEngine/GuardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000105 /* GuardApp/Core/GuardEngine/GuardEngine.swift */; };
+		A00000000000000000000006 /* GuardApp/Core/Identity/LocalIdentityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000106 /* GuardApp/Core/Identity/LocalIdentityStore.swift */; };
+		A00000000000000000000007 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000107 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift */; };
+		A00000000000000000000008 /* GuardApp/Core/Permissions/PermissionGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000108 /* GuardApp/Core/Permissions/PermissionGuide.swift */; };
+		A00000000000000000000009 /* GuardApp/DesignSystem/GuardDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000109 /* GuardApp/DesignSystem/GuardDesignSystem.swift */; };
+		A0000000000000000000000A /* GuardApp/Features/Alarm/AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010A /* GuardApp/Features/Alarm/AlarmView.swift */; };
+		A0000000000000000000000B /* GuardApp/Features/Home/HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010B /* GuardApp/Features/Home/HomeView.swift */; };
+		A0000000000000000000000C /* GuardApp/Features/Pairing/AddDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010C /* GuardApp/Features/Pairing/AddDeviceView.swift */; };
+		A0000000000000000000000D /* GuardApp/Features/Pairing/GuardPairingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010D /* GuardApp/Features/Pairing/GuardPairingModels.swift */; };
+		A0000000000000000000000E /* GuardApp/Features/Pairing/GuardPairingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010E /* GuardApp/Features/Pairing/GuardPairingService.swift */; };
+		A0000000000000000000000F /* GuardApp/Features/Settings/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A00000000000000000000101 /* GuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/GuardApp.swift; sourceTree = "<group>"; };
-		A00000000000000000000102 /* AlarmEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/AlarmEngine/AlarmEngine.swift; sourceTree = "<group>"; };
-		A00000000000000000000103 /* BlePrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Bluetooth/BlePrototype.swift; sourceTree = "<group>"; };
-		A00000000000000000000104 /* RollingIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Bluetooth/RollingIdentifier.swift; sourceTree = "<group>"; };
-		A00000000000000000000105 /* GuardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/GuardEngine/GuardEngine.swift; sourceTree = "<group>"; };
-		A00000000000000000000106 /* LocalIdentityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Identity/LocalIdentityStore.swift; sourceTree = "<group>"; };
-		A00000000000000000000107 /* LanHeartbeatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift; sourceTree = "<group>"; };
-		A00000000000000000000108 /* PermissionGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Permissions/PermissionGuide.swift; sourceTree = "<group>"; };
-		A00000000000000000000109 /* GuardDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/DesignSystem/GuardDesignSystem.swift; sourceTree = "<group>"; };
-		A0000000000000000000010A /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Alarm/AlarmView.swift; sourceTree = "<group>"; };
-		A0000000000000000000010B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Home/HomeView.swift; sourceTree = "<group>"; };
-		A0000000000000000000010C /* AddDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/AddDeviceView.swift; sourceTree = "<group>"; };
-		A0000000000000000000010D /* GuardPairingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/GuardPairingModels.swift; sourceTree = "<group>"; };
-		A0000000000000000000010E /* GuardPairingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/GuardPairingService.swift; sourceTree = "<group>"; };
-		A0000000000000000000010F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Settings/SettingsView.swift; sourceTree = "<group>"; };
-		A00000000000000000000110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GuardApp/Info.plist; sourceTree = "<group>"; };
+		A00000000000000000000101 /* GuardApp/GuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/GuardApp.swift; sourceTree = "<group>"; };
+		A00000000000000000000102 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/AlarmEngine/AlarmEngine.swift; sourceTree = "<group>"; };
+		A00000000000000000000103 /* GuardApp/Core/Bluetooth/BlePrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Bluetooth/BlePrototype.swift; sourceTree = "<group>"; };
+		A00000000000000000000104 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Bluetooth/RollingIdentifier.swift; sourceTree = "<group>"; };
+		A00000000000000000000105 /* GuardApp/Core/GuardEngine/GuardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/GuardEngine/GuardEngine.swift; sourceTree = "<group>"; };
+		A00000000000000000000106 /* GuardApp/Core/Identity/LocalIdentityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Identity/LocalIdentityStore.swift; sourceTree = "<group>"; };
+		A00000000000000000000107 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift; sourceTree = "<group>"; };
+		A00000000000000000000108 /* GuardApp/Core/Permissions/PermissionGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/Permissions/PermissionGuide.swift; sourceTree = "<group>"; };
+		A00000000000000000000109 /* GuardApp/DesignSystem/GuardDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/DesignSystem/GuardDesignSystem.swift; sourceTree = "<group>"; };
+		A0000000000000000000010A /* GuardApp/Features/Alarm/AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Alarm/AlarmView.swift; sourceTree = "<group>"; };
+		A0000000000000000000010B /* GuardApp/Features/Home/HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Home/HomeView.swift; sourceTree = "<group>"; };
+		A0000000000000000000010C /* GuardApp/Features/Pairing/AddDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/AddDeviceView.swift; sourceTree = "<group>"; };
+		A0000000000000000000010D /* GuardApp/Features/Pairing/GuardPairingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/GuardPairingModels.swift; sourceTree = "<group>"; };
+		A0000000000000000000010E /* GuardApp/Features/Pairing/GuardPairingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/GuardPairingService.swift; sourceTree = "<group>"; };
+		A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Settings/SettingsView.swift; sourceTree = "<group>"; };
+		A00000000000000000000110 /* GuardApp/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GuardApp/Info.plist; sourceTree = "<group>"; };
 		A00000000000000000000111 /* DeviceGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -66,22 +66,22 @@
 		A00000000000000000000302 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A00000000000000000000101 /* GuardApp.swift */,
-				A00000000000000000000102 /* AlarmEngine.swift */,
-				A00000000000000000000103 /* BlePrototype.swift */,
-				A00000000000000000000104 /* RollingIdentifier.swift */,
-				A00000000000000000000105 /* GuardEngine.swift */,
-				A00000000000000000000106 /* LocalIdentityStore.swift */,
-				A00000000000000000000107 /* LanHeartbeatMessage.swift */,
-				A00000000000000000000108 /* PermissionGuide.swift */,
-				A00000000000000000000109 /* GuardDesignSystem.swift */,
-				A0000000000000000000010A /* AlarmView.swift */,
-				A0000000000000000000010B /* HomeView.swift */,
-				A0000000000000000000010C /* AddDeviceView.swift */,
-				A0000000000000000000010D /* GuardPairingModels.swift */,
-				A0000000000000000000010E /* GuardPairingService.swift */,
-				A0000000000000000000010F /* SettingsView.swift */,
-				A00000000000000000000110 /* Info.plist */,
+				A00000000000000000000101 /* GuardApp/GuardApp.swift */,
+				A00000000000000000000102 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift */,
+				A00000000000000000000103 /* GuardApp/Core/Bluetooth/BlePrototype.swift */,
+				A00000000000000000000104 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift */,
+				A00000000000000000000105 /* GuardApp/Core/GuardEngine/GuardEngine.swift */,
+				A00000000000000000000106 /* GuardApp/Core/Identity/LocalIdentityStore.swift */,
+				A00000000000000000000107 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift */,
+				A00000000000000000000108 /* GuardApp/Core/Permissions/PermissionGuide.swift */,
+				A00000000000000000000109 /* GuardApp/DesignSystem/GuardDesignSystem.swift */,
+				A0000000000000000000010A /* GuardApp/Features/Alarm/AlarmView.swift */,
+				A0000000000000000000010B /* GuardApp/Features/Home/HomeView.swift */,
+				A0000000000000000000010C /* GuardApp/Features/Pairing/AddDeviceView.swift */,
+				A0000000000000000000010D /* GuardApp/Features/Pairing/GuardPairingModels.swift */,
+				A0000000000000000000010E /* GuardApp/Features/Pairing/GuardPairingService.swift */,
+				A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */,
+				A00000000000000000000110 /* GuardApp/Info.plist */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -151,21 +151,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00000000000000000000001 /* GuardApp.swift in Sources */,
-				A00000000000000000000002 /* AlarmEngine.swift in Sources */,
-				A00000000000000000000003 /* BlePrototype.swift in Sources */,
-				A00000000000000000000004 /* RollingIdentifier.swift in Sources */,
-				A00000000000000000000005 /* GuardEngine.swift in Sources */,
-				A00000000000000000000006 /* LocalIdentityStore.swift in Sources */,
-				A00000000000000000000007 /* LanHeartbeatMessage.swift in Sources */,
-				A00000000000000000000008 /* PermissionGuide.swift in Sources */,
-				A00000000000000000000009 /* GuardDesignSystem.swift in Sources */,
-				A0000000000000000000000A /* AlarmView.swift in Sources */,
-				A0000000000000000000000B /* HomeView.swift in Sources */,
-				A0000000000000000000000C /* AddDeviceView.swift in Sources */,
-				A0000000000000000000000D /* GuardPairingModels.swift in Sources */,
-				A0000000000000000000000E /* GuardPairingService.swift in Sources */,
-				A0000000000000000000000F /* SettingsView.swift in Sources */,
+				A00000000000000000000001 /* GuardApp/GuardApp.swift in Sources */,
+				A00000000000000000000002 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift in Sources */,
+				A00000000000000000000003 /* GuardApp/Core/Bluetooth/BlePrototype.swift in Sources */,
+				A00000000000000000000004 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift in Sources */,
+				A00000000000000000000005 /* GuardApp/Core/GuardEngine/GuardEngine.swift in Sources */,
+				A00000000000000000000006 /* GuardApp/Core/Identity/LocalIdentityStore.swift in Sources */,
+				A00000000000000000000007 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift in Sources */,
+				A00000000000000000000008 /* GuardApp/Core/Permissions/PermissionGuide.swift in Sources */,
+				A00000000000000000000009 /* GuardApp/DesignSystem/GuardDesignSystem.swift in Sources */,
+				A0000000000000000000000A /* GuardApp/Features/Alarm/AlarmView.swift in Sources */,
+				A0000000000000000000000B /* GuardApp/Features/Home/HomeView.swift in Sources */,
+				A0000000000000000000000C /* GuardApp/Features/Pairing/AddDeviceView.swift in Sources */,
+				A0000000000000000000000D /* GuardApp/Features/Pairing/GuardPairingModels.swift in Sources */,
+				A0000000000000000000000E /* GuardApp/Features/Pairing/GuardPairingService.swift in Sources */,
+				A0000000000000000000000F /* GuardApp/Features/Settings/SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = F4657JWDQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GuardApp/Info.plist;
@@ -302,7 +303,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.deviceguard.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jianglong.deviceguard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -320,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = F4657JWDQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GuardApp/Info.plist;
@@ -327,7 +329,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.deviceguard.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jianglong.deviceguard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
