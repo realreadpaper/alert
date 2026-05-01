@@ -1,3 +1,4 @@
 .superpowers/
 .gradle/
 **/build/
+local.properties
