@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +28,8 @@ fun SettingsScreen(rows: List<String>) {
         modifier = Modifier
             .fillMaxSize()
             .background(GuardColors.Surface50)
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(GuardSpacing.Xl)
     ) {
         Text("设置", color = GuardColors.Ink900, fontSize = 30.sp, fontWeight = FontWeight.Bold)
