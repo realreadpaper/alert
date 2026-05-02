@@ -22,6 +22,9 @@
 		A0000000000000000000000D /* GuardApp/Features/Pairing/GuardPairingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010D /* GuardApp/Features/Pairing/GuardPairingModels.swift */; };
 		A0000000000000000000000E /* GuardApp/Features/Pairing/GuardPairingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010E /* GuardApp/Features/Pairing/GuardPairingService.swift */; };
 		A0000000000000000000000F /* GuardApp/Features/Settings/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */; };
+		A00000000000000000000010 /* GuardApp/GuardAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000112 /* GuardApp/GuardAppState.swift */; };
+		A00000000000000000000011 /* GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000113 /* GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift */; };
+		A00000000000000000000012 /* GuardApp/Features/Pairing/GuardQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000114 /* GuardApp/Features/Pairing/GuardQRCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Settings/SettingsView.swift; sourceTree = "<group>"; };
 		A00000000000000000000110 /* GuardApp/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GuardApp/Info.plist; sourceTree = "<group>"; };
 		A00000000000000000000111 /* DeviceGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00000000000000000000112 /* GuardApp/GuardAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/GuardAppState.swift; sourceTree = "<group>"; };
+		A00000000000000000000113 /* GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift; sourceTree = "<group>"; };
+		A00000000000000000000114 /* GuardApp/Features/Pairing/GuardQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardApp/Features/Pairing/GuardQRCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,12 +73,14 @@
 			isa = PBXGroup;
 			children = (
 				A00000000000000000000101 /* GuardApp/GuardApp.swift */,
+				A00000000000000000000112 /* GuardApp/GuardAppState.swift */,
 				A00000000000000000000102 /* GuardApp/Core/AlarmEngine/AlarmEngine.swift */,
 				A00000000000000000000103 /* GuardApp/Core/Bluetooth/BlePrototype.swift */,
 				A00000000000000000000104 /* GuardApp/Core/Bluetooth/RollingIdentifier.swift */,
 				A00000000000000000000105 /* GuardApp/Core/GuardEngine/GuardEngine.swift */,
 				A00000000000000000000106 /* GuardApp/Core/Identity/LocalIdentityStore.swift */,
 				A00000000000000000000107 /* GuardApp/Core/LocalNetwork/LanHeartbeatMessage.swift */,
+				A00000000000000000000113 /* GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift */,
 				A00000000000000000000108 /* GuardApp/Core/Permissions/PermissionGuide.swift */,
 				A00000000000000000000109 /* GuardApp/DesignSystem/GuardDesignSystem.swift */,
 				A0000000000000000000010A /* GuardApp/Features/Alarm/AlarmView.swift */,
@@ -80,6 +88,7 @@
 				A0000000000000000000010C /* GuardApp/Features/Pairing/AddDeviceView.swift */,
 				A0000000000000000000010D /* GuardApp/Features/Pairing/GuardPairingModels.swift */,
 				A0000000000000000000010E /* GuardApp/Features/Pairing/GuardPairingService.swift */,
+				A00000000000000000000114 /* GuardApp/Features/Pairing/GuardQRCode.swift */,
 				A0000000000000000000010F /* GuardApp/Features/Settings/SettingsView.swift */,
 				A00000000000000000000110 /* GuardApp/Info.plist */,
 			);
@@ -166,6 +175,9 @@
 				A0000000000000000000000D /* GuardApp/Features/Pairing/GuardPairingModels.swift in Sources */,
 				A0000000000000000000000E /* GuardApp/Features/Pairing/GuardPairingService.swift in Sources */,
 				A0000000000000000000000F /* GuardApp/Features/Settings/SettingsView.swift in Sources */,
+				A00000000000000000000010 /* GuardApp/GuardAppState.swift in Sources */,
+				A00000000000000000000011 /* GuardApp/Core/LocalNetwork/LanHeartbeatTransport.swift in Sources */,
+				A00000000000000000000012 /* GuardApp/Features/Pairing/GuardQRCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,10 @@
 	<string>用于在本地发现看护组设备是否仍在附近，不会上传位置或身份信息。</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>用于在同一局域网内交换本地看护心跳，不会连接云端。</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_deviceguard._tcp</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

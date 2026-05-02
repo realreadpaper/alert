@@ -9,6 +9,7 @@ struct GuardSelfTestRunner {
         runRollingIdentifierSelfTest()
         runGuardEngineSelfTest()
         try runGuardPairingServiceSelfTest()
+        try runGuardAppStateSelfTest()
     }
 }
 #endif

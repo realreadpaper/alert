@@ -7,10 +7,19 @@ struct HomeDeviceRow: Identifiable, Equatable {
     let stateColor: Color
 }
 
+struct HomeStatusSummary: Equatable {
+    let title: String
+    let color: Color
+    let deviceCountText: String
+    let message: String
+}
+
 struct HomeView: View {
     let mode: GuardMode
     let deviceRows: [HomeDeviceRow]
     let isGuarding: Bool
+    let homeStatus: HomeStatusSummary
+    let localNetworkStatus: String
     let onToggleGuarding: () -> Void
     let onAddDevice: () -> Void
     let onSelectMode: (GuardMode) -> Void
@@ -64,13 +73,16 @@ struct HomeView: View {
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(GuardColor.ink500)
                 Spacer()
-                GuardStatusPill(title: isGuarding ? "安全" : "未开启", color: isGuarding ? GuardColor.safe : GuardColor.ink500)
+                GuardStatusPill(title: homeStatus.title, color: homeStatus.color)
             }
-            Text("\(deviceRows.count)")
+            Text(homeStatus.deviceCountText)
                 .font(.system(size: 46, weight: .heavy))
                 .foregroundStyle(GuardColor.ink900)
-            Text(isGuarding ? "台设备正在本地看护" : "开启后，将在设备离开时提醒你")
+            Text(homeStatus.message)
                 .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(GuardColor.ink500)
+            Text(localNetworkStatus)
+                .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(GuardColor.ink500)
         }
     }

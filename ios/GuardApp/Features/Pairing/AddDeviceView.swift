@@ -1,5 +1,9 @@
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 struct AddDeviceView: View {
     let inviteCode: String
     let expiresInText: String
@@ -21,13 +25,7 @@ struct AddDeviceView: View {
                 Text("邀请二维码")
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(GuardColor.ink700)
-                ZStack {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(GuardColor.ink900, lineWidth: 2)
-                    Text("QR")
-                        .font(.system(size: 34, weight: .heavy))
-                        .foregroundStyle(GuardColor.ink900)
-                }
+                GuardQRCodeView(payload: inviteCode)
                 .aspectRatio(1, contentMode: .fit)
                 Text(expiresInText)
                     .font(.system(size: 13, weight: .medium))
@@ -53,5 +51,43 @@ struct AddDeviceView: View {
         }
         .padding(GuardSpacing.xl)
         .background(GuardColor.surface50.ignoresSafeArea())
+    }
+}
+
+private struct GuardQRCodeView: View {
+    let payload: String
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(GuardColor.surface0)
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(GuardColor.line200, lineWidth: 1)
+
+            if let image = qrImage {
+                image
+                    .interpolation(.none)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(GuardSpacing.lg)
+            } else {
+                Text("无法生成二维码")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(GuardColor.danger)
+            }
+        }
+    }
+
+    private var qrImage: Image? {
+        guard let ciImage = GuardQRCode.makeCIImage(from: payload) else { return nil }
+
+        #if canImport(UIKit)
+        let scaled = ciImage.transformed(by: CGAffineTransform(scaleX: 10, y: 10))
+        let context = CIContext()
+        guard let cgImage = context.createCGImage(scaled, from: scaled.extent) else { return nil }
+        return Image(uiImage: UIImage(cgImage: cgImage))
+        #else
+        return nil
+        #endif
     }
 }

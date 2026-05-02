@@ -3,25 +3,34 @@ import SwiftUI
 #if !SELF_TEST
 @main
 struct GuardApp: App {
-    @State private var mode: GuardMode = .outing
-    @State private var isGuarding = true
-
-    private let devices = [
-        HomeDeviceRow(id: "iphone", name: "主力 iPhone", stateText: "在线", stateColor: GuardColor.safe),
-        HomeDeviceRow(id: "android", name: "商务 Android", stateText: "在线", stateColor: GuardColor.safe),
-        HomeDeviceRow(id: "backup", name: "备用机", stateText: "在线", stateColor: GuardColor.safe)
-    ]
+    @StateObject private var appState = GuardAppState.live()
 
     var body: some Scene {
         WindowGroup {
-            HomeView(
-                mode: mode,
-                deviceRows: devices,
-                isGuarding: isGuarding,
-                onToggleGuarding: { isGuarding.toggle() },
-                onAddDevice: {},
-                onSelectMode: { mode = $0 }
-            )
+            Group {
+                switch appState.screen {
+                case .home:
+                    HomeView(
+                        mode: appState.mode,
+                        deviceRows: appState.deviceRows,
+                        isGuarding: appState.isGuarding,
+                        homeStatus: appState.homeStatus,
+                        localNetworkStatus: appState.localNetworkStatus,
+                        onToggleGuarding: appState.toggleGuarding,
+                        onAddDevice: appState.startAddDevice,
+                        onSelectMode: appState.selectMode
+                    )
+                case .addDevice:
+                    AddDeviceView(
+                        inviteCode: appState.activeInviteCode,
+                        expiresInText: "邀请 5 分钟内有效，仅通过本地二维码交换",
+                        onCancel: appState.cancelAddDevice
+                    )
+                }
+            }
+            .onAppear {
+                appState.start()
+            }
         }
     }
 }
