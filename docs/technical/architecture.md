@@ -24,7 +24,7 @@
 
 ## 3. 系统边界
 
-App 不包含以下后端组件：
+首版不包含以下后端组件：
 
 - 用户账号服务。
 - 云端设备状态服务。
@@ -218,21 +218,90 @@ online
 | 室内 | 15-25 秒 | 45-60 秒 | 90-120 秒 | 是，可降低音量 |
 | 静音 | 15-25 秒 | 45-60 秒 | 不强响 | 否 |
 
-阈值不是产品承诺，应作为可远程配置的本地默认值写在 App 版本配置中。由于首版无云端，配置随 App 发版更新。
+阈值不是产品承诺，应作为 App 内本地默认值随版本发布更新。
 
-## 8. 本地安全设计
+## 8. 跨平台 Wire Contract
 
-### 8.1 设备身份
+首版本地协议必须以文档为准，不直接使用 Swift `rawValue` 或 Kotlin `enum.name` 作为隐式协议。所有跨平台 JSON 枚举使用小写字符串：
+
+```text
+mode: outing | indoor | silent
+platform: ios | android
+role: owner | member
+deviceState: online | unstable | pre_alert | alarming | paused | permission_limited | low_power_risk
+```
+
+### 8.1 Pairing Invite
+
+二维码邀请使用版本化 envelope：
+
+```json
+{
+  "type": "device_guard_pairing_invite",
+  "protocolVersion": 1,
+  "inviteId": "invite-1",
+  "groupId": "group-1",
+  "ownerDeviceId": "owner-1",
+  "joinToken": "token-1",
+  "expiresAtEpochSeconds": 1710000300
+}
+```
+
+接收方必须拒绝未知 `type`、不支持的 `protocolVersion`、已过期的 `expiresAtEpochSeconds`，以及缺失必要字段的 payload。
+
+### 8.2 LAN Heartbeat
+
+局域网心跳 JSON：
+
+```json
+{
+  "protocolVersion": 1,
+  "groupHash": "abcd1234abcd1234",
+  "deviceId": "ios-1",
+  "deviceNameHash": "ef567890ef567890",
+  "timestamp": 1710000000,
+  "nonce": "nonce-1",
+  "mode": "outing",
+  "signature": "hex-hmac"
+}
+```
+
+签名 payload 固定为：
+
+```text
+protocolVersion|groupHash|deviceId|deviceNameHash|timestamp|nonce|mode
+```
+
+示例：
+
+```text
+1|abcd1234abcd1234|ios-1|ef567890ef567890|1710000000|nonce-1|outing
+```
+
+`signature` 为 `HMAC-SHA256(groupSecret, payload)` 的小写十六进制字符串。接收方必须验证协议版本、时间窗口、签名和 `mode` 枚举。
+
+### 8.3 BLE Discovery
+
+BLE 发现采用两阶段协议：
+
+1. 广播阶段：iOS 与 Android 都广播同一个 service UUID：`75B9D2B7-7D40-4B10-9F4B-9D3592D4E101`。
+2. 读取阶段：扫描到 service 后读取 rolling ID characteristic：`75B9D2B8-7D40-4B10-9F4B-9D3592D4E101`。
+
+Android 可以额外在 service data 中放入 rolling ID 作为快速路径，但跨平台互通不能依赖 service data，因为 iOS 外设广播不可靠支持该字段。
+
+## 9. 本地安全设计
+
+### 9.1 设备身份
 
 设备首次启动生成随机 `deviceId`。该 ID 只在看护组内使用，不应上传或用于广告追踪。
 
-### 8.2 组密钥
+### 9.2 组密钥
 
 创建看护组时生成 `groupSecret`。加入流程完成后，新设备本地保存密钥。
 
 iOS 保存到 Keychain。Android 保存到 Android Keystore 保护的加密存储。
 
-### 8.3 短期广播标识
+### 9.3 短期广播标识
 
 BLE 广播不直接发送 `groupId` 或 `deviceId`。建议使用：
 
@@ -242,18 +311,18 @@ rollingId = HMAC_SHA256(groupSecret, deviceId + timeBucket).prefix(8-16 bytes)
 
 `timeBucket` 可按 1-5 分钟滚动。组内设备可本地计算候选 rollingId 并识别对端，外部观察者难以长期关联同一设备。
 
-### 8.4 心跳签名
+### 9.4 心跳签名
 
 局域网心跳使用组密钥签名，避免陌生设备伪造在线状态。
 
 ```text
-payload = groupIdHash + deviceId + timestamp + nonce + mode
+payload = protocolVersion + groupHash + deviceId + deviceNameHash + timestamp + nonce + mode
 signature = HMAC_SHA256(groupSecret, payload)
 ```
 
 接收方必须校验时间窗口、nonce 和签名。
 
-## 9. 本地存储
+## 10. 本地存储
 
 iOS：
 
@@ -267,7 +336,7 @@ Android：
 
 不应存储历史位置和历史轨迹。最近状态只用于当前看护判断，可被用户清空。
 
-## 10. 日志策略
+## 11. 日志策略
 
 为了调试误报，需要本地诊断日志，但必须默认克制。
 
@@ -288,7 +357,7 @@ Android：
 
 诊断日志只留在本机。若未来提供“导出日志给客服”，必须由用户手动导出并明确确认。
 
-## 11. 关键风险
+## 12. 关键风险
 
 1. iOS 后台 BLE 调度不保证实时，需要真实设备长期测试。
 2. Android 厂商系统可能限制后台扫描和前台服务，需要设备适配指引。

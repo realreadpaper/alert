@@ -22,10 +22,20 @@ func runGuardPairingServiceSelfTest() throws {
     let invite = try service.createInvite(group: group, ownerDeviceId: "owner-device", now: now)
     assert(invite.inviteId == "invite-1")
     assert(invite.joinToken == "token-1")
+    assert(invite.expiresAtEpochSeconds == 1_777_560_300)
 
     let payload = try service.encodeInviteForQRCode(invite)
+    assert(payload.contains("\"type\":\"device_guard_pairing_invite\""))
+    assert(payload.contains("\"expiresAtEpochSeconds\":1777560300"))
     let decoded = try service.decodeInviteFromQRCode(payload, now: now.addingTimeInterval(10))
     assert(decoded == invite)
+
+    let canonicalPayload = """
+    {"type":"device_guard_pairing_invite","protocolVersion":1,"inviteId":"invite-2","groupId":"group-2","ownerDeviceId":"owner-2","joinToken":"token-2","expiresAtEpochSeconds":1777560600}
+    """
+    let canonicalInvite = try service.decodeInviteFromQRCode(canonicalPayload, now: now)
+    assert(canonicalInvite.inviteId == "invite-2")
+    assert(canonicalInvite.expiresAtEpochSeconds == 1_777_560_600)
 
     let request = service.createJoinRequest(
         invite: decoded,

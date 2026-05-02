@@ -18,6 +18,8 @@ func runLocalHeartbeatSelfTest() throws {
     assert(!signer.verify(message, groupSecret: secret, now: 1_777_560_100))
 
     let encoded = try signer.encode(message)
+    let encodedText = String(data: encoded, encoding: .utf8) ?? ""
+    assert(encodedText.contains("\"mode\":\"outing\""))
     let decoded = try signer.decode(encoded)
     assert(decoded == message)
 }

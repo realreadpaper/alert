@@ -2,6 +2,7 @@ import Foundation
 
 final class GuardPairingService {
     private let protocolVersion = 1
+    private let inviteType = "device_guard_pairing_invite"
     private let idFactory: () -> String
     private let tokenFactory: () -> String
     private let secretFactory: () -> Data
@@ -18,10 +19,7 @@ final class GuardPairingService {
         self.secretFactory = secretFactory
 
         encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
-
         decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
     }
 
     func createGroup(ownerDeviceId: String, ownerDisplayName: String, ownerPlatform: GuardPlatform, now: Date) -> (GuardGroup, Data) {
@@ -49,7 +47,7 @@ final class GuardPairingService {
         }
         return PairingInvite(
             inviteId: idFactory(),
-            expiresAt: now.addingTimeInterval(seconds),
+            expiresAtEpochSeconds: Int64(now.timeIntervalSince1970 + seconds),
             groupId: group.groupId,
             ownerDeviceId: ownerDeviceId,
             joinToken: tokenFactory(),
@@ -58,19 +56,27 @@ final class GuardPairingService {
     }
 
     func encodeInviteForQRCode(_ invite: PairingInvite) throws -> String {
-        let data = try encoder.encode(invite)
+        let data = try encoder.encode(PairingInviteEnvelope(type: inviteType, invite: invite))
         return String(data: data, encoding: .utf8) ?? ""
     }
 
     func decodeInviteFromQRCode(_ payload: String, now: Date) throws -> PairingInvite {
+        try decodeInviteFromQRCode(payload, nowEpochSeconds: Int64(now.timeIntervalSince1970))
+    }
+
+    func decodeInviteFromQRCode(_ payload: String, nowEpochSeconds: Int64) throws -> PairingInvite {
         guard let data = payload.data(using: .utf8) else {
             throw PairingError.invalidInvitePayload
         }
-        let invite = try decoder.decode(PairingInvite.self, from: data)
+        let envelope = try decoder.decode(PairingInviteEnvelope.self, from: data)
+        guard envelope.type == inviteType else {
+            throw PairingError.invalidInvitePayload
+        }
+        let invite = envelope.invite
         guard invite.protocolVersion == protocolVersion else {
             throw PairingError.unsupportedProtocolVersion
         }
-        guard invite.expiresAt > now else {
+        guard invite.expiresAtEpochSeconds > nowEpochSeconds else {
             throw PairingError.expiredInvite
         }
         return invite
@@ -83,7 +89,7 @@ final class GuardPairingService {
             deviceId: deviceId,
             displayName: displayName,
             platform: platform,
-            requestedAt: now
+            requestedAtEpochSeconds: Int64(now.timeIntervalSince1970)
         )
     }
 
@@ -91,7 +97,7 @@ final class GuardPairingService {
         guard invite.protocolVersion == protocolVersion else {
             throw PairingError.unsupportedProtocolVersion
         }
-        guard invite.expiresAt > now else {
+        guard invite.expiresAtEpochSeconds > Int64(now.timeIntervalSince1970) else {
             throw PairingError.expiredInvite
         }
         guard request.groupId == group.groupId && invite.groupId == group.groupId else {
@@ -116,5 +122,36 @@ final class GuardPairingService {
         )
 
         return ApprovedJoin(group: updated, groupSecret: groupSecret)
+    }
+}
+
+private struct PairingInviteEnvelope: Codable {
+    let type: String
+    let protocolVersion: Int
+    let inviteId: String
+    let groupId: String
+    let ownerDeviceId: String
+    let joinToken: String
+    let expiresAtEpochSeconds: Int64
+
+    init(type: String, invite: PairingInvite) {
+        self.type = type
+        protocolVersion = invite.protocolVersion
+        inviteId = invite.inviteId
+        groupId = invite.groupId
+        ownerDeviceId = invite.ownerDeviceId
+        joinToken = invite.joinToken
+        expiresAtEpochSeconds = invite.expiresAtEpochSeconds
+    }
+
+    var invite: PairingInvite {
+        PairingInvite(
+            inviteId: inviteId,
+            expiresAtEpochSeconds: expiresAtEpochSeconds,
+            groupId: groupId,
+            ownerDeviceId: ownerDeviceId,
+            joinToken: joinToken,
+            protocolVersion: protocolVersion
+        )
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +40,16 @@ fun HomeScreen(
     mode: GuardMode,
     deviceRows: List<HomeDeviceRow>,
     isGuarding: Boolean,
+    statusTitle: String = if (isGuarding) "安全" else "未开启",
+    statusDescription: String = if (isGuarding) "台设备正在本地看护" else "开启后，将在设备离开时提醒你",
+    modeTitle: String = when (mode) {
+        GuardMode.OUTING -> "外出模式"
+        GuardMode.INDOOR -> "室内模式"
+        GuardMode.SILENT -> "静音模式"
+    },
+    modeHint: String = "",
+    primaryActionTitle: String = if (isGuarding) "停止看护" else "开始看护",
+    onAddDevice: () -> Unit = {},
     onToggleGuarding: () -> Unit,
     onSelectMode: (GuardMode) -> Unit
 ) {
@@ -51,8 +62,19 @@ fun HomeScreen(
             .padding(GuardSpacing.Xl),
         verticalArrangement = Arrangement.spacedBy(GuardSpacing.Lg)
     ) {
-        Text("PRIVATE GUARD", color = GuardColors.Ink500, fontSize = 11.sp, fontWeight = FontWeight.Bold)
-        Text("看护组", color = GuardColors.Ink900, fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Row(verticalAlignment = Alignment.Bottom) {
+            Column {
+                Text("PRIVATE GUARD", color = GuardColors.Ink500, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text("看护组", color = GuardColors.Ink900, fontSize = 30.sp, fontWeight = FontWeight.Bold)
+            }
+            Spacer(Modifier.weight(1f))
+            Column(horizontalAlignment = Alignment.End) {
+                Text(modeTitle, color = GuardColors.Ink500, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                TextButton(onClick = onAddDevice) {
+                    Text("添加设备", color = GuardColors.Ink900, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                }
+            }
+        }
 
         Column(
             modifier = Modifier
@@ -64,11 +86,11 @@ fun HomeScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("当前状态", color = GuardColors.Ink500, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.weight(1f))
-                Text(if (isGuarding) "安全" else "未开启", color = if (isGuarding) GuardColors.Safe else GuardColors.Ink500)
+                Text(statusTitle, color = if (isGuarding) GuardColors.Safe else GuardColors.Ink500)
             }
             Text(deviceRows.size.toString(), color = GuardColors.Ink900, fontSize = 46.sp, fontWeight = FontWeight.Black)
             Text(
-                if (isGuarding) "台设备正在本地看护" else "开启后，将在设备离开时提醒你",
+                statusDescription,
                 color = GuardColors.Ink500,
                 fontSize = 15.sp
             )
@@ -78,6 +100,9 @@ fun HomeScreen(
             ModeChip("外出", mode == GuardMode.OUTING) { onSelectMode(GuardMode.OUTING) }
             ModeChip("室内", mode == GuardMode.INDOOR) { onSelectMode(GuardMode.INDOOR) }
             ModeChip("静音", mode == GuardMode.SILENT) { onSelectMode(GuardMode.SILENT) }
+        }
+        if (modeHint.isNotBlank()) {
+            Text(modeHint, color = GuardColors.Ink500, fontSize = 13.sp, fontWeight = FontWeight.Medium)
         }
 
         Column(verticalArrangement = Arrangement.spacedBy(GuardSpacing.Sm)) {
@@ -99,7 +124,7 @@ fun HomeScreen(
         }
 
         Spacer(Modifier.weight(1f))
-        GuardPrimaryButton(if (isGuarding) "停止看护" else "开始看护", onToggleGuarding)
+        GuardPrimaryButton(primaryActionTitle, onToggleGuarding)
     }
 }
 

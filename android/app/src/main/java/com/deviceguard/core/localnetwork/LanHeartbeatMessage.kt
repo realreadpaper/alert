@@ -59,7 +59,7 @@ class LanHeartbeatSigner {
             .put("deviceNameHash", message.deviceNameHash)
             .put("timestamp", message.timestamp)
             .put("nonce", message.nonce)
-            .put("mode", message.mode.name)
+            .put("mode", message.mode.wireValue)
             .put("signature", message.signature)
             .toString()
     }
@@ -73,7 +73,7 @@ class LanHeartbeatSigner {
             deviceNameHash = json.getString("deviceNameHash"),
             timestamp = json.getLong("timestamp"),
             nonce = json.getString("nonce"),
-            mode = GuardMode.valueOf(json.getString("mode")),
+            mode = GuardMode.fromWireValue(json.getString("mode")),
             signature = json.getString("signature")
         )
     }
@@ -113,7 +113,7 @@ class LanHeartbeatSigner {
         deviceNameHash,
         timestamp.toString(),
         nonce,
-        mode.name
+        mode.wireValue
     ).joinToString("|")
 
     private fun shortHash(value: String): String {

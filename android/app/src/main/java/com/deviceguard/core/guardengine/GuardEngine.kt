@@ -1,9 +1,14 @@
 package com.deviceguard.core.guardengine
 
-enum class GuardMode {
-    OUTING,
-    INDOOR,
-    SILENT
+enum class GuardMode(val wireValue: String) {
+    OUTING("outing"),
+    INDOOR("indoor"),
+    SILENT("silent");
+
+    companion object {
+        fun fromWireValue(value: String): GuardMode = entries.firstOrNull { it.wireValue == value }
+            ?: throw IllegalArgumentException("Unsupported guard mode: $value")
+    }
 }
 
 enum class DeviceState {

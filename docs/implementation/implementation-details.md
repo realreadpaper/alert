@@ -203,6 +203,59 @@ for each device in group.devices:
 - 心跳包必须签名。
 - 未签名或签名错误的包直接丢弃。
 
+## 5.5 跨平台协议实现细节
+
+### 配对二维码
+
+iOS 与 Android 必须编码同一份 invite envelope：
+
+```json
+{
+  "type": "device_guard_pairing_invite",
+  "protocolVersion": 1,
+  "inviteId": "invite-1",
+  "groupId": "group-1",
+  "ownerDeviceId": "owner-1",
+  "joinToken": "token-1",
+  "expiresAtEpochSeconds": 1710000300
+}
+```
+
+实现要求：
+
+- `type` 必须等于 `device_guard_pairing_invite`。
+- `protocolVersion` 必须等于 `1`。
+- `expiresAtEpochSeconds` 必须大于当前本机 epoch seconds。
+- iOS 不再把 invite 的过期时间作为 JSON `Date` 字段输出。
+- Android 不再把 Kotlin enum `name` 当作跨平台协议值。
+
+### 局域网心跳
+
+签名 payload 必须固定为：
+
+```text
+protocolVersion|groupHash|deviceId|deviceNameHash|timestamp|nonce|mode
+```
+
+`mode` 必须是 `outing`、`indoor`、`silent` 之一。Android 需要通过 `wireValue` 显式映射，不能使用 `GuardMode.OUTING.name`。
+
+### BLE 发现
+
+固定 UUID：
+
+```text
+serviceUuid: 75B9D2B7-7D40-4B10-9F4B-9D3592D4E101
+rollingIdCharacteristicUuid: 75B9D2B8-7D40-4B10-9F4B-9D3592D4E101
+```
+
+互通路径：
+
+```text
+scan serviceUuid -> connect peripheral/GATT server -> read rollingIdCharacteristicUuid -> update lastBleSeenAt
+```
+
+Android 的 service data 只能作为快速路径。iOS 与 Android 的真实联调验收必须验证 characteristic 读取路径。
+
 ## 6. 报警音与震动
 
 报警音原则：

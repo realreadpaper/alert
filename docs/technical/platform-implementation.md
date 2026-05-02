@@ -2,7 +2,7 @@
 
 ## 1. 原则
 
-平台实现必须服务于同一个产品体验：本地编组、即时报警、无云端、商务优雅 UI。不同平台可以使用不同底层机制，但对用户暴露的状态、文案和流程应一致。
+平台实现必须服务于同一个产品体验：本地编组、即时报警、本地优先、无云端依赖、商务优雅 UI。不同平台可以使用不同底层机制，但对用户暴露的状态、文案和流程应一致。
 
 ## 2. iOS 实现
 
@@ -213,7 +213,11 @@ capabilityFlags: UInt8
 | Android 前台服务受限 | 后台可靠性下降 | 显示系统设置指引 |
 | iOS 后台受限 | 后台提醒可能延迟 | 回到前台立即刷新状态 |
 
-## 6. 官方文档参考
+## 6. 后续云端扩展边界
+
+当前实现不包含云端辅助、账号、远程推送或服务端请求，也不声明 `INTERNET` 权限。后续如扩展云端，只能作为单独阶段重新设计、重新做隐私审查，并保持默认本地模式不变。
+
+## 7. 官方文档参考
 
 - Apple Core Bluetooth Background Processing: https://developer.apple.com/documentation/corebluetooth/background-processing-for-ios-apps
 - Android Bluetooth permissions: https://developer.android.com/develop/connectivity/bluetooth/bt-permissions

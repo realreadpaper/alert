@@ -58,6 +58,7 @@ class GuardPairingService(
 
     fun encodeInviteForQrCode(invite: PairingInvite): String {
         return JSONObject()
+            .put("type", INVITE_TYPE)
             .put("inviteId", invite.inviteId)
             .put("expiresAtEpochSeconds", invite.expiresAtEpochSeconds)
             .put("groupId", invite.groupId)
@@ -70,6 +71,10 @@ class GuardPairingService(
     fun decodeInviteFromQrCode(payload: String, nowEpochSeconds: Long): PairingInvite {
         val json = runCatching { JSONObject(payload) }
             .getOrElse { throw PairingException.InvalidInvitePayload }
+
+        if (json.optString("type") != INVITE_TYPE) {
+            throw PairingException.InvalidInvitePayload
+        }
 
         val invite = runCatching {
             PairingInvite(
@@ -146,5 +151,6 @@ class GuardPairingService(
 
     private companion object {
         const val PROTOCOL_VERSION = 1
+        const val INVITE_TYPE = "device_guard_pairing_invite"
     }
 }

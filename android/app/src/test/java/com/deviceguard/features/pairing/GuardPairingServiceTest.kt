@@ -3,6 +3,7 @@ package com.deviceguard.features.pairing
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import org.json.JSONObject
 
 class GuardPairingServiceTest {
     @Test
@@ -27,8 +28,22 @@ class GuardPairingServiceTest {
 
         val invite = service.createInvite(group, "owner-device", now)
         val payload = service.encodeInviteForQrCode(invite)
+        val json = JSONObject(payload)
+        assertEquals("device_guard_pairing_invite", json.getString("type"))
+        assertEquals("invite-1", json.getString("inviteId"))
+        assertEquals("group-1", json.getString("groupId"))
+        assertEquals("owner-device", json.getString("ownerDeviceId"))
+        assertEquals("token-1", json.getString("joinToken"))
+        assertEquals(1_777_560_300L, json.getLong("expiresAtEpochSeconds"))
         val decoded = service.decodeInviteFromQrCode(payload, now + 10)
         assertEquals(invite, decoded)
+
+        val canonicalPayload = """
+            {"type":"device_guard_pairing_invite","protocolVersion":1,"inviteId":"invite-2","groupId":"group-2","ownerDeviceId":"owner-2","joinToken":"token-2","expiresAtEpochSeconds":1777560600}
+        """.trimIndent()
+        val canonicalInvite = service.decodeInviteFromQrCode(canonicalPayload, now)
+        assertEquals("invite-2", canonicalInvite.inviteId)
+        assertEquals(1_777_560_600L, canonicalInvite.expiresAtEpochSeconds)
 
         val request = service.createJoinRequest(
             invite = decoded,

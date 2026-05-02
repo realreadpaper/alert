@@ -35,7 +35,7 @@ struct GuardGroup: Codable, Equatable {
 
 struct PairingInvite: Codable, Equatable {
     let inviteId: String
-    let expiresAt: Date
+    let expiresAtEpochSeconds: Int64
     let groupId: String
     let ownerDeviceId: String
     let joinToken: String
@@ -48,7 +48,7 @@ struct JoinRequest: Codable, Equatable {
     let deviceId: String
     let displayName: String
     let platform: GuardPlatform
-    let requestedAt: Date
+    let requestedAtEpochSeconds: Int64
 }
 
 struct ApprovedJoin: Codable, Equatable {

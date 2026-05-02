@@ -25,7 +25,9 @@ class LanHeartbeatMessageTest {
         assertFalse(signer.verify(message, "wrong-secret".toByteArray(), now = 1_777_560_010))
         assertFalse(signer.verify(message, secret, now = 1_777_560_100))
 
-        val decoded = signer.decode(signer.encode(message))
+        val encoded = signer.encode(message)
+        assertTrue(encoded.contains("\"mode\":\"outing\""))
+        val decoded = signer.decode(encoded)
         assertEquals(message, decoded)
     }
 }
